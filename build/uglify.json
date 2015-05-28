@@ -1,0 +1,13 @@
+{
+    "options": {
+        "compress": {
+            "sequences": false
+        },
+        "preserveComments": "some"
+    },
+    "all_files": {
+        "files": {
+            "dest/lpTtlCache.min.js": ["src/lpTtlCache.js"]
+        }
+    }
+}
