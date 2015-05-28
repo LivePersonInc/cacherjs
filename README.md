@@ -52,3 +52,7 @@ Type: `Function`
 Default value: `Empty function`
 
 optional global handler for timeout of items in cache
+
+License
+----------
+MIT
