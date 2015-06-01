@@ -2,7 +2,7 @@ ttl-cache
 ========
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![Build Status](https://travis-ci.org/LivePersonInc/ttl-cache.svg)](https://travis-ci.org/LivePersonInc/ttl-cache)
-[![coverage status](http://img.shields.io/badge/local%20coverage-{{coverage}}%25-green.svg)](http://img.shields.io/badge/local%20coverage-{{coverage}}%25-green.svg)
+[![Test Coverage](https://codeclimate.com/github/LivePersonInc/ttl-cache/badges/coverage.svg)](https://codeclimate.com/github/LivePersonInc/ttl-cache/coverage)
 [![Code Climate](https://codeclimate.com/github/LivePersonInc/ttl-cache/badges/gpa.svg)](https://codeclimate.com/github/LivePersonInc/ttl-cache)
 <!---[![npm version](https://badge.fury.io/js/ttl-cache.svg)](http://badge.fury.io/js/ttl-cache)
 [![Dependency Status](https://david-dm.org/LivePersonInc/ttl-cache.svg?theme=shields.io)](https://david-dm.org/LivePersonInc/ttl-cache)
