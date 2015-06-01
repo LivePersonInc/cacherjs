@@ -2,6 +2,13 @@ lp-ttl-cache
 ========
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![Build Status](https://travis-ci.org/LivePersonInc/ttl-cache.svg)](https://travis-ci.org/LivePersonInc/ttl-cache)
+[![coverage status](http://img.shields.io/badge/local%20coverage-{{coverage}}%25-green.svg)](http://img.shields.io/badge/local%20coverage-{{coverage}}%25-green.svg)
+[![Code Climate](https://codeclimate.com/github/LivePersonInc/ttl-cache/badges/gpa.svg)](https://codeclimate.com/github/LivePersonInc/ttl-cache)
+[![npm version](https://badge.fury.io/js/ttl-cache.svg)](http://badge.fury.io/js/ttl-cache)
+[![Dependency Status](https://david-dm.org/LivePersonInc/ttl-cache.svg?theme=shields.io)](https://david-dm.org/LivePersonInc/ttl-cache)
+[![devDependency Status](https://david-dm.org/LivePersonInc/ttl-cache/dev-status.svg?theme=shields.io)](https://david-dm.org/LivePersonInc/ttl-cache#info=devDependencies)
+[![npm downloads](https://img.shields.io/npm/dm/ttl-cache.svg)](https://img.shields.io/npm/dm/ttl-cache.svg)
+[![NPM](https://nodei.co/npm/ttl-cache.png)](https://nodei.co/npm/ttl-cache/)
 
 > JS TTL Cache Mechanism.
 
