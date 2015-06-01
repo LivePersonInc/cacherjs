@@ -1,19 +1,7 @@
 lp-ttl-cache
 ========
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-<!--- [![alt text][2]][1] [![alt text][4]][3] [![alt text][6]][5] [![alt text][8]][7]
-
- [1]: http://teamcity/viewType.html?buildTypeId=FeInfra_LpTtlCacheMaster
- [2]: http://ctvr-ci:3000/?build=FeInfra_LpTtlCacheMaster ("Teamcity build Status")
-
- [3]: http://teamcity/viewType.html?buildTypeId=FeInfra_LpTtlCacheMaster
- [4]: http://ctvr-ci:3000/?build=FeInfra_LpTtlCacheMaster&type=cov ("Coverage")
-
- [5]: http://teamcity/viewType.html?buildTypeId=FeInfra_LpTtlCacheMaster
- [6]: http://ctvr-ci:3000/?build=FeInfra_LpTtlCacheMaster&type=test ("Tests")
-
- [7]: http://teamcity/viewType.html?buildTypeId=FeInfra_LpTtlCacheMaster
- [8]: http://ctvr-ci:3000/?type=npm&artifact=lp-ttl-cache ("NPM") -->
+[![Build Status](https://travis-ci.org/LivePersonInc//ttl-cache.svg)](https://travis-ci.org/LivePersonInc//ttl-cache)
 
 > JS TTL Cache Mechanism.
 
