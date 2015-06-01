@@ -7,7 +7,7 @@
     },
     "all_files": {
         "files": {
-            "dest/lpTtlCache.min.js": ["src/lpTtlCache.js"]
+            "dest/cacher.min.js": ["src/cacher.js"]
         }
     }
 }

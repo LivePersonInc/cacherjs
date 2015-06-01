@@ -17,7 +17,7 @@ This is a UMD module that can be used as AMD module, native and NodeJS.
 Getting Started
 ---------------
 
-Run `npm install ttl-cache`
+Run `npm install cacherjs`
 
 Overview
 -------------
@@ -47,6 +47,35 @@ Type: `Function`
 Default value: `Empty function`
 
 optional global handler for timeout of items in cache
+
+API
+----------
+### get (key, [optional]pop)
+Will get the value associated with the given `key`.
+`pop` is a boolean flag indicating whether to also pop/remove the item from cache.
+
+### set (key, value, [optional]ttl, [optional]callback)
+Will set `value` and associate it with the given `key`.
+`ttl` will override the time to live for the item inside the cache.
+`callback` will be called on item timeout - return false if you want the item to not be deleted after ttl
+
+### remove (key)
+Will remove `key` from cache.
+
+### removeAll
+Will clean the cache completely
+
+Example
+-----------
+```javascript
+var Cacher = require("cacherjs").Cacher;
+var cache = new Cacher({
+    ttl: 10,
+    interval: 5
+});
+ttlCache.set("key1", "someValue");
+ttlCache.get("key1"); //"someValue"
+```
 
 License
 ----------

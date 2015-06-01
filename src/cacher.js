@@ -19,16 +19,16 @@
         namespace = getNamespace();
 
         // AMD. Register as an anonymous module.
-        define("lpTtlCache", ["exports"], function (exports) {
-            if (!namespace.LPTtlCache) {
+        define("cacher", ["exports"], function (exports) {
+            if (!namespace.Cacher) {
                 factory(root, namespace);
             }
 
-            return namespace.LPTtlCache;
+            return namespace.Cacher;
         });
 
         //<lptag>
-        if (root.lpTag && root.lpTag.taglets && !namespace.LPTtlCache) {
+        if (root.lpTag && root.lpTag.taglets && !namespace.Cacher) {
             factory(root, namespace);
         }
         //</lptag>
@@ -48,7 +48,7 @@
     /*jshint validthis:true */
 
     /**
-     * LPTtlCache constructor
+     * Cacher constructor
      * @constructor
      * @param {Object} [options] - the configuration options for the instance
      * @param {Number} [options.max] - optional max items in cache
@@ -58,16 +58,16 @@
      * @param {Array} [options.stores] - optional array of stores by priority
      * @param {Function} [options.oncomplete] - optional callback for loading completion
      */
-    function LPTtlCache(options) {
+    function Cacher(options) {
         // For forcing new keyword
-        if (false === (this instanceof LPTtlCache)) {
-            return new LPTtlCache(options);
+        if (false === (this instanceof Cacher)) {
+            return new Cacher(options);
         }
 
         this.initialize(options);
     }
 
-    LPTtlCache.prototype = (function () {
+    Cacher.prototype = (function () {
         /**
          * Method for initialization
          * @param {Object} [options] - the configuration options for the instance
@@ -293,7 +293,7 @@
 
 // attach properties to the exports object to define
 // the exported module properties.
-    exports.LPTtlCache = exports.LPTtlCache || LPTtlCache;
+    exports.Cacher = exports.Cacher || Cacher;
 }))
 ;
 

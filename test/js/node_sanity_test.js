@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var requireHelper = require('./util/require_helper');
-var LPTtlCache = requireHelper("lpTtlCache").LPTtlCache;
+var Cacher = requireHelper("cacher").Cacher;
 var TtlCacheFileStore = requireHelper("/stores/ttlCacheFileStore").TtlCacheFileStore;
 
 describe('lp-ttl-cache Node Sanity Tests', function () {
@@ -9,7 +9,7 @@ describe('lp-ttl-cache Node Sanity Tests', function () {
         var ttlCache;
 
         before(function () {
-            ttlCache = new LPTtlCache({
+            ttlCache = new Cacher({
                 ttl: 10,
                 interval: 5
             });
@@ -85,7 +85,7 @@ describe('lp-ttl-cache Node Sanity Tests', function () {
         var cacheFilePath = __dirname + "/../resources/test_cache_file.json";
 
         before(function (done) {
-            ttlCache = new LPTtlCache({
+            ttlCache = new Cacher({
                 oncomplete: function() { done(); },
                 stores: [ new TtlCacheFileStore({
                     file: cacheFilePath,
