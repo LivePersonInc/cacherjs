@@ -1,12 +1,8 @@
-describe('lp-ttl-cache Sanity Tests', function () {
+var expect = require('chai').expect;
 
-    var LPTtlCache;
-    before(function (done) {
-        require(["lpTtlCache"], function (_LPTtlCache) {
-            LPTtlCache = _LPTtlCache;
-            done();
-        })
-    });
+var LPTtlCache = require("../../src/lpTtlCache").LPTtlCache;
+
+describe('lp-ttl-cache Sanity Tests', function () {
 
     describe("simple get/set with ttl test", function () {
         var ttlCache;

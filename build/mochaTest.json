@@ -5,6 +5,6 @@
             "reporter": "spec",
             "quiet": false
         },
-        "src": ["test/js/node_sanity_test.js"]
+        "src": ["test/js/*.js"]
     }
 }
