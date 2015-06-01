@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
-
-var LPTtlCache = require("../../src/lpTtlCache").LPTtlCache;
-var TtlCacheFileStore = require("../../src/stores/ttlCacheFileStore").TtlCacheFileStore;
+var requireHelper = require('./util/require_helper');
+var LPTtlCache = requireHelper("lpTtlCache").LPTtlCache;
+var TtlCacheFileStore = requireHelper("/stores/ttlCacheFileStore").TtlCacheFileStore;
 
 describe('lp-ttl-cache Node Sanity Tests', function () {
     describe("simple get/set with ttl test", function () {

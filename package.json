@@ -1,47 +1,49 @@
 {
-    "name": "ttl-cache",
-    "description": "JS TTL Cache Mechanism",
-    "version": "0.0.1",
-    "author": {
-        "name": "LivePersonInc",
-        "email": "fe-infra-lp@liveperson.com"
-    },
-    "contributors": [],
-    "dependencies": {
-        "JSONStream": "~1.0.4",
-        "event-stream": "~3.3.1"
-    },
-    "devDependencies": {
-        "blanket": "^1.1.6",
-        "chai": "^2.1.0",
-        "grunt": "0.4.x",
-        "grunt-available-tasks": "^0.5.7",
-        "grunt-contrib-connect": "0.3.x",
-        "grunt-contrib-jshint": "0.10.x",
-        "grunt-contrib-uglify": "^0.9.1",
-        "grunt-node-version": "^1.0.0",
-        "grunt-mocha-test": "^0.12.7",
-        "grunt-replace": "0.7.x",
-        "load-grunt-config": "^0.16.0",
-        "mocha": "^2.1.0",
-        "requirejs": "^2.1.16",
-        "sinon": "^1.12.2",
-        "time-grunt": "^1.1.0",
-        "uglify-js": "^2.4.16"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/LivePersonInc/ttl-cache"
-    },
-    "main": "./src/lpTtlCache.js",
-    "keywords": [
-        "liveperson",
-        "ttl",
-        "cache"
-    ],
-    "engines": {
-        "node": ">=0.10.36",
-        "npm": ">=1.4"
-    },
-    "license": "MIT"
+  "name": "ttl-cache",
+  "description": "JS TTL Cache Mechanism",
+  "version": "0.0.1",
+  "author": {
+    "name": "LivePersonInc",
+    "email": "fe-infra-lp@liveperson.com"
+  },
+  "contributors": [],
+  "dependencies": {
+    "JSONStream": "~1.0.4",
+    "event-stream": "~3.3.1"
+  },
+  "devDependencies": {
+    "chai": "^2.1.0",
+    "grunt": "0.4.x",
+    "grunt-available-tasks": "^0.5.7",
+    "grunt-contrib-jshint": "0.10.x",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-env": "^0.4.4",
+    "grunt-istanbul": "^0.5.0",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-node-version": "^1.0.0",
+    "grunt-replace": "0.7.x",
+    "load-grunt-config": "^0.16.0",
+    "mocha": "^2.1.0",
+    "sinon": "^1.12.2",
+    "time-grunt": "^1.1.0",
+    "uglify-js": "^2.4.16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LivePersonInc/ttl-cache"
+  },
+  "main": "./src/lpTtlCache.js",
+  "keywords": [
+    "liveperson",
+    "ttl",
+    "cache"
+  ],
+  "scripts": {
+    "test": "grunt default --verbose"
+  },
+  "engines": {
+    "node": ">=0.10.36",
+    "npm": ">=1.4"
+  },
+  "license": "MIT"
 }

@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-
-var LPTtlCache = require("../../src/lpTtlCache").LPTtlCache;
+var requireHelper = require('./util/require_helper');
+var LPTtlCache = requireHelper("lpTtlCache").LPTtlCache;
 
 describe('lp-ttl-cache Sanity Tests', function () {
 

@@ -1,6 +1,6 @@
 module.exports = function (grunt, options) {
 
-    var tasks = ['node_version', 'jshint', 'mochaTest', 'uglify'];
+    var tasks = ['node_version', 'jshint', 'env', 'instrument', 'mochaTest', 'storeCoverage', 'makeReport', 'uglify'];
 
     // computation...
     return {
