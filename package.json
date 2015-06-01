@@ -1,5 +1,5 @@
 {
-  "name": "ttl-cache",
+  "name": "cacherjs",
   "description": "JS TTL Cache Mechanism",
   "version": "0.0.1",
   "author": {
