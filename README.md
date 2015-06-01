@@ -1,7 +1,7 @@
 lp-ttl-cache
 ========
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-[![Build Status](https://travis-ci.org/LivePersonInc//ttl-cache.svg)](https://travis-ci.org/LivePersonInc//ttl-cache)
+[![Build Status](https://travis-ci.org/LivePersonInc/ttl-cache.svg)](https://travis-ci.org/LivePersonInc/ttl-cache)
 
 > JS TTL Cache Mechanism.
 
