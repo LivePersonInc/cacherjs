@@ -30,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LivePersonInc/ttl-cache"
+    "url": "https://github.com/LivePersonInc/chacherjs"
   },
   "main": "./src/lpTtlCache.js",
   "keywords": [
