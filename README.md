@@ -4,11 +4,11 @@ cacherjs
 [![Build Status](https://travis-ci.org/LivePersonInc/ttl-cache.svg)](https://travis-ci.org/LivePersonInc/ttl-cache)
 [![Test Coverage](https://codeclimate.com/github/LivePersonInc/ttl-cache/badges/coverage.svg)](https://codeclimate.com/github/LivePersonInc/ttl-cache/coverage)
 [![Code Climate](https://codeclimate.com/github/LivePersonInc/ttl-cache/badges/gpa.svg)](https://codeclimate.com/github/LivePersonInc/ttl-cache)
-<!---[![npm version](https://badge.fury.io/js/ttl-cache.svg)](http://badge.fury.io/js/ttl-cache)
-[![Dependency Status](https://david-dm.org/LivePersonInc/ttl-cache.svg?theme=shields.io)](https://david-dm.org/LivePersonInc/ttl-cache)
-[![devDependency Status](https://david-dm.org/LivePersonInc/ttl-cache/dev-status.svg?theme=shields.io)](https://david-dm.org/LivePersonInc/ttl-cache#info=devDependencies)
-[![npm downloads](https://img.shields.io/npm/dm/ttl-cache.svg)](https://img.shields.io/npm/dm/ttl-cache.svg)
-[![NPM](https://nodei.co/npm/ttl-cache.png)](https://nodei.co/npm/ttl-cache/) -->
+[![npm version](https://badge.fury.io/js/cacherjs.svg)](http://badge.fury.io/js/cacherjs)
+[![Dependency Status](https://david-dm.org/LivePersonInc/cacherjs.svg?theme=shields.io)](https://david-dm.org/LivePersonInc/cacherjs)
+[![devDependency Status](https://david-dm.org/LivePersonInc/cacherjs/dev-status.svg?theme=shields.io)](https://david-dm.org/LivePersonInc/cacherjs#info=devDependencies)
+[![npm downloads](https://img.shields.io/npm/dm/cacherjs.svg)](https://img.shields.io/npm/dm/cacherjs.svg)
+[![NPM](https://nodei.co/npm/cacherjs.png)](https://nodei.co/npm/cacherjs/)
 
 > JS TTL Cache Mechanism.
 
