@@ -1,7 +1,7 @@
 cacherjs
 ========
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-[![Build Status](https://travis-ci.org/LivePersonInc/ttl-cache.svg)](https://travis-ci.org/LivePersonInc/ttl-cache)
+[![Build Status](https://travis-ci.org/LivePersonInc/cacherjs.svg)](https://travis-ci.org/LivePersonInc/cacherjs)
 [![Test Coverage](https://codeclimate.com/github/LivePersonInc/ttl-cache/badges/coverage.svg)](https://codeclimate.com/github/LivePersonInc/ttl-cache/coverage)
 [![Code Climate](https://codeclimate.com/github/LivePersonInc/ttl-cache/badges/gpa.svg)](https://codeclimate.com/github/LivePersonInc/ttl-cache)
 [![npm version](https://badge.fury.io/js/cacherjs.svg)](http://badge.fury.io/js/cacherjs)
