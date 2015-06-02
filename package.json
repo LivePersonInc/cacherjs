@@ -1,7 +1,7 @@
 {
     "name": "cacherjs",
     "description": "JS TTL Cache Mechanism",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "author": {
         "name": "LivePersonInc",
         "email": "fe-infra-lp@liveperson.com"
