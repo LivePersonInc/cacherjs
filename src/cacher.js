@@ -1,48 +1,25 @@
 ;(function (root, factory) {
     "use strict";
 
-    var namespace;
-
-    function getNamespace() {
-        //<lptag>
-        if (root.lpTag) {
-            root.lpTag.channel = root.lpTag.channel || {};
-
-            return root.lpTag.channel;
-        }
-        //</lptag>
-        return root;
-    }
-
     if ("function" === typeof define && define.amd) {
-        // Browser globals
-        namespace = getNamespace();
 
         // AMD. Register as an anonymous module.
-        define("cacher", ["exports"], function (exports) {
-            if (!namespace.Cacher) {
-                factory(root, namespace);
+        define("cacher", ["exports"], function () {
+            if (!root.Cacher) {
+                factory(root);
             }
 
-            return namespace.Cacher;
+            return root.Cacher;
         });
-
-        //<lptag>
-        if (root.lpTag && root.lpTag.taglets && !namespace.Cacher) {
-            factory(root, namespace);
-        }
-        //</lptag>
     }
     else if ("object" === typeof exports) {
         // CommonJS
-        factory(root, exports);
+        factory(exports);
     }
     else {
-        // Browser globals
-        namespace = getNamespace();
-        factory(root, namespace);
+        factory(root);
     }
-}(this, function (root, exports) {
+}(typeof CacherRoot === "undefined" ? this : CacherRoot , function (root) {
     "use strict";
 
     /*jshint validthis:true */
@@ -293,7 +270,7 @@
 
 // attach properties to the exports object to define
 // the exported module properties.
-    exports.Cacher = exports.Cacher || Cacher;
+    root.Cacher = root.Cacher || Cacher;
 }))
 ;
 
