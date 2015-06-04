@@ -1,6 +1,7 @@
 ;(function (root, factory) {
     "use strict";
 
+    //<amd>
     if ("function" === typeof define && define.amd) {
 
         // AMD. Register as an anonymous module.
@@ -11,8 +12,10 @@
 
             return root.Cacher;
         });
+        return;
     }
-    else if ("object" === typeof exports) {
+    //</amd>
+    if ("object" === typeof exports) {
         // CommonJS
         factory(exports);
     }
