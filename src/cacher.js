@@ -1,6 +1,7 @@
 ;(function (root, factory) {
     "use strict";
 
+    /* istanbul ignore if */
     //<amd>
     if ("function" === typeof define && define.amd) {
 
@@ -15,6 +16,7 @@
         return;
     }
     //</amd>
+    /* istanbul ignore else */
     if ("object" === typeof exports) {
         // CommonJS
         factory(exports);
