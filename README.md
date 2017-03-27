@@ -2,8 +2,8 @@ cacherjs
 ========
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![Build Status](https://travis-ci.org/LivePersonInc/cacherjs.svg)](https://travis-ci.org/LivePersonInc/cacherjs)
-[![Test Coverage](https://codeclimate.com/github/LivePersonInc/ttl-cache/badges/coverage.svg)](https://codeclimate.com/github/LivePersonInc/ttl-cache/coverage)
-[![Code Climate](https://codeclimate.com/github/LivePersonInc/ttl-cache/badges/gpa.svg)](https://codeclimate.com/github/LivePersonInc/ttl-cache)
+[![Test Coverage](https://codeclimate.com/github/LivePersonInc/cacherjs/badges/coverage.svg)](https://codeclimate.com/github/LivePersonInc/cacherjs/coverage)
+[![Code Climate](https://codeclimate.com/github/LivePersonInc/cacherjs/badges/gpa.svg)](https://codeclimate.com/github/LivePersonInc/cacherjs)
 [![npm version](https://badge.fury.io/js/cacherjs.svg)](http://badge.fury.io/js/cacherjs)
 [![Dependency Status](https://david-dm.org/LivePersonInc/cacherjs.svg?theme=shields.io)](https://david-dm.org/LivePersonInc/cacherjs)
 [![devDependency Status](https://david-dm.org/LivePersonInc/cacherjs/dev-status.svg?theme=shields.io)](https://david-dm.org/LivePersonInc/cacherjs#info=devDependencies)
