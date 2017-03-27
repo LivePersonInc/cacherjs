@@ -34,9 +34,11 @@
      * @constructor
      * @param {Object} [options] - the configuration options for the instance
      * @param {Number} [options.max] - optional max items in cache
+     * @param {Number} [options.maxStrategy] - optional strategy for max items (new items will not be added or closest ttl item should be removed)
      * @param {Number} [options.ttl] - optional TTL for each cache item
      * @param {Number} [options.interval] - optional interval for eviction loop
      * @param {Function} [options.ontimeout] - optional global handler for timeout of items in cache
+     * @param {Function} [options.onkickout] - optional global handler for kick out (forced evict) of items in cache
      * @param {Array} [options.stores] - optional array of stores by priority
      * @param {Function} [options.oncomplete] - optional callback for loading completion
      */
@@ -49,14 +51,21 @@
         this.initialize(options);
     }
 
+    Cacher.MAX_STRATEGY = {
+        NO_ADD: 0,
+        CLOSEST_TTL: 1
+    };
+
     Cacher.prototype = (function () {
         /**
          * Method for initialization
          * @param {Object} [options] - the configuration options for the instance
          * @param {Number} [options.max] - optional max items in cache
+         * @param {Number} [options.maxStrategy] - optional strategy for max items (new items will not be added or closest ttl item should be removed)
          * @param {Number} [options.ttl] - optional TTL for each cache item
          * @param {Number} [options.interval] - optional interval for eviction loop
          * @param {Function} [options.ontimeout] - optional global handler for timeout of items in cache - return false if you want the item to not be deleted after ttl
+         * @param {Function} [options.onkickout] - optional global handler for kick out (forced evict) of items in cache
          * @param {Array} [options.stores] - optional array of stores by priority
          * @param {Function} [options.oncomplete] - optional callback for loading completion
          */
@@ -74,13 +83,14 @@
             if (!this.initialized) {
                 options = options || {};
 
-                this.cache = {};                                                                                           // Objects cache
-                this.length = 0;                                                                                           // Amount of items in cache
-                this.max = !isNaN(options.max) && 0 < options.max ? parseInt(options.max, 10) : 0;                         // Maximum items in cache - 0 for unlimited
-                this.ttl = !isNaN(options.ttl) && 0 < options.ttl ? parseInt(options.ttl, 10) : 0;                         // Time to leave for items (this can be overidden for specific items using the set method - 0 for unlimited
-                this.interval = !isNaN(options.interval) && 0 < options.interval ? parseInt(options.interval, 10) : 1000;  // Interval for running the eviction loop
-                this.ontimeout = "function" === typeof options.ontimeout ? options.ontimeout : function () {
-                };              // Callback for timeout of items
+                this.cache = {};                                                                                                               // Objects cache
+                this.length = 0;                                                                                                               // Amount of items in cache
+                this.maxStrategy = options.maxStrategy || Cacher.MAX_STRATEGY.NO_ADD;                                                          // The strategy to use when max items in cache
+                this.max = options.max && !isNaN(options.max) && 0 < options.max ? parseInt(options.max, 10) : 0;                              // Maximum items in cache - 0 for unlimited
+                this.ttl = options.ttl && !isNaN(options.ttl) && 0 < options.ttl ? parseInt(options.ttl, 10) : 0;                              // Time to leave for items (this can be overidden for specific items using the set method - 0 for unlimited
+                this.interval = options.interval && !isNaN(options.interval) && 0 < options.interval ? parseInt(options.interval, 10) : 1000;  // Interval for running the eviction loop
+                this.ontimeout = "function" === typeof options.ontimeout ? options.ontimeout : function () {};                                 // Callback for timeout of items
+                this.onkickout = "function" === typeof options.onkickout ? options.onkickout : function () {};                                 // Callback for kickout of items
                 this.stores = options.stores || [];
 
                 while (index < this.stores.length && !stop) {
@@ -194,8 +204,8 @@
             var eviction;
             var timeout;
 
-            if (0 === this.max || this.length < this.max) {
-                eviction = (!isNaN(ttl) ? parseInt(ttl, 10) : this.ttl);
+            if (0 === this.max || this.length < this.max || Cacher.MAX_STRATEGY.CLOSEST_TTL === this.maxStrategy) {
+                eviction = (ttl && !isNaN(ttl) && 0 < ttl ? parseInt(ttl, 10) : this.ttl);
 
                 this.cache[key] = {
                     item: item
@@ -214,8 +224,8 @@
 
                 _syncStores.call(this, "set", key, item, ttl);
 
-                if (eviction && (this.cache[key].callback || "function" === typeof this.ontimeout)) {
-                    _evict.call(this);
+                if (eviction && (this.cache[key].callback || "function" === typeof this.ontimeout || "function" === typeof this.onkickout) || this.max && this.length > this.max) {
+                    _evict.call(this, this.max && this.length > this.max);
                 }
 
                 return true;
@@ -227,13 +237,17 @@
 
         /**
          * Method for evicting expired items from the cache
+         * @param {Boolean} kickoutClosestTTL - optional flag to force the removal of the item with the closest TTL
+         * @returns {Number} The number of removed items from the cache
          * @private
          */
-        function _evict() {
+        function _evict(kickoutClosestTTL) {
             var callback;
             var item;
             var cbRes;
             var timeoutRes;
+            var kickOut;
+            var removed = 0;
 
             if (this.timer) {
                 clearTimeout(this.timer);
@@ -241,27 +255,73 @@
 
             if (this.length) {
                 for (var key in this.cache) {
-                    if (this.cache.hasOwnProperty(key) && this.cache[key].timeout && this.cache[key].timeout <= (new Date()).getTime()) {
-                        item = this.cache[key].item;
-                        callback = this.cache[key].callback;
+                    if (this.cache.hasOwnProperty(key) && this.cache[key].timeout) {
+                        if (this.cache[key].timeout <= (new Date()).getTime()) {
+                            item = this.cache[key].item;
+                            callback = this.cache[key].callback;
 
-                        if (callback) {
-                            cbRes = callback(key, item);
+                            if (callback) {
+                                cbRes = callback(key, item);
+                            }
+
+                            if (this.ontimeout) {
+                                timeoutRes = this.ontimeout(key, item);
+                            }
+
+                            // Now remove it
+                            if (cbRes !== false && timeoutRes !== false) {
+                                remove.call(this, key);
+                                removed++;
+                            }
+                            else if (!removed && kickoutClosestTTL) {
+                                if (!kickOut) {
+                                    kickOut = {
+                                        key: key,
+                                        timeout: this.cache[key].timeout
+                                    };
+                                }
+                                else if (kickOut.timeout > this.cache[key].timeout) {
+                                    kickOut.key = key;
+                                    kickOut.timeout = this.cache[key].timeout;
+                                }
+                            }
                         }
-
-                        if (this.ontimeout) {
-                            timeoutRes = this.ontimeout(key, item);
-                        }
-
-                        // Now remove it
-                        if (cbRes !== false && timeoutRes !== false) {
-                            remove.call(this, key);
+                        else if (!removed && kickoutClosestTTL) {
+                            if (!kickOut) {
+                                kickOut = {
+                                    key: key,
+                                    timeout: this.cache[key].timeout
+                                };
+                            }
+                            else if (kickOut.timeout > this.cache[key].timeout) {
+                                kickOut.key = key;
+                                kickOut.timeout = this.cache[key].timeout;
+                            }
                         }
                     }
+                }
+
+                if (!removed && kickOut && this.cache[kickOut.key]) {
+                    item = this.cache[kickOut.key].item;
+                    callback = this.cache[kickOut.key].callback;
+
+                    if (callback) {
+                        callback(kickOut.key, item);
+                    }
+
+                    if (this.onkickout) {
+                        this.onkickout(kickOut.key, item);
+                    }
+
+                    // Now remove it
+                    remove.call(this, kickOut.key);
+                    removed++;
                 }
             }
 
             this.timer = setTimeout(_evict.bind(this), this.interval);
+
+            return removed;
         }
 
         return {
@@ -273,8 +333,8 @@
         };
     }());
 
-// attach properties to the exports object to define
-// the exported module properties.
+    // attach properties to the exports object to define
+    // the exported module properties.
     root.Cacher = root.Cacher || Cacher;
 }))
 ;
