@@ -82,6 +82,42 @@ describe('lp-ttl-cache Node Sanity Tests', function () {
             }, 20);
         });
 
+        it("should not evict on timeout and update TTL", function (done) {
+            var ret = ttlCache.set("key2", "someValue", 10, function(key) {
+                return { ttl: 30, callback: function(key) {
+                    return true;
+                }};
+            });
+
+            expect(ret).to.be.true;
+
+            setTimeout(function () {
+                expect(ttlCache.get("key2")).to.equal("someValue");
+            }, 30);
+
+            setTimeout(function () {
+                expect(ttlCache.get("key2")).to.be.undefined;
+                done();
+            }, 50);
+        });
+
+        it("should never evict on timeout and update TTL", function (done) {
+            var ret = ttlCache.set("key2", "someValue", 10, function(key) {
+                return { ttl: 30 };
+            });
+
+            expect(ret).to.be.true;
+
+            setTimeout(function () {
+                expect(ttlCache.get("key2")).to.equal("someValue");
+            }, 30);
+
+            setTimeout(function () {
+                expect(ttlCache.get("key2")).to.equal("someValue");
+                done();
+            }, 50);
+        });
+
         it("should evict on timeout without deleting", function (done) {
             var ret = ttlCache.set("key2", "someValue", null, function(key) {
                 expect(key).to.equal("key2");

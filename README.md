@@ -69,7 +69,7 @@ Will get the value associated with the given `key`.
 ### set (key, value, [optional]ttl, [optional]callback)
 Will set `value` and associate it with the given `key`.
 `ttl` will override the time to live for the item inside the cache.
-`callback` will be called on item timeout - return false if you want the item to not be deleted after ttl
+`callback` will be called on item timeout - return false if you want the item to not be deleted after ttl, or object { ttl: number, callback: function } to update the TTL or callback
 
 ### remove (key)
 Will remove `key` from cache.
