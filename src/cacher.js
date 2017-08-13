@@ -123,11 +123,22 @@
         }
 
         /**
+         * Method for touching an item in the cache (update its TTL/callback)
+         * @param {String} key - the key for the item to be cached
+         * @param {Number} [ttl] - the time to live for the item inside the cache
+         * @param {Function} [callback] - optional callback to be called on item timeout - return false if you want the item to not be deleted after ttl
+         */
+        function touch(key, ttl, callback) {
+            var item = get.call(this, key, true);
+            return _insert.call(this, key, item, ttl, callback);
+        }
+
+        /**
          * Method for setting an item to the cache
          * @param {String} key - the key for the item to be cached
          * @param {Object} item - the item to cache
          * @param {Number} [ttl] - the time to live for the item inside the cache
-         * @param {Function} [callback] - optional callback to be called on item timeout - return false if you want the item to not be deleted after ttl
+         * @param {Function} [callback] - optional callback to be called on item timeout - return false if you want the item to not be deleted after ttl, or object { ttl: number, callback: function } to update the TTL or callback
          */
         function set(key, item, ttl, callback) {
             return _insert.call(this, key, item, ttl, callback);
@@ -216,6 +227,7 @@
                 if (eviction) {
                     timeout = (new Date()).getTime() + eviction;
                     this.cache[key].timeout = timeout;
+                    this.cache[key].ttl = eviction;
                 }
 
                 if ("function" === typeof callback) {
@@ -269,11 +281,12 @@
                             }
 
                             // Now remove it
-                            if (cbRes !== false && timeoutRes !== false) {
+                            if (typeof cbRes === 'object') {
+                                touch.call(this, key, cbRes.ttl || this.cache[key].ttl, cbRes.callback || callback);
+                            } else if (cbRes !== false && timeoutRes !== false) {
                                 remove.call(this, key);
                                 removed++;
-                            }
-                            else if (!removed && kickoutClosestTTL) {
+                            } else if (!removed && kickoutClosestTTL) {
                                 if (!kickOut) {
                                     kickOut = {
                                         key: key,
@@ -328,6 +341,7 @@
             initialize: initialize,
             get: get,
             set: set,
+            touch: touch,
             remove: remove,
             removeAll: removeAll
         };
