@@ -37,7 +37,7 @@
      * @param {Number} [options.maxStrategy] - optional strategy for max items (new items will not be added or closest ttl item should be removed)
      * @param {Number} [options.ttl] - optional TTL for each cache item
      * @param {Number} [options.interval] - optional interval for eviction loop
-     * @param {Function} [options.ontimeout] - optional global handler for timeout of items in cache
+     * @param {Function} [options.ontimeout] - optional global handler for timeout of items in cache - return false if you want the items to not be deleted after ttl, or object { ttl: number, callback: function } to update the TTL or callback
      * @param {Function} [options.onkickout] - optional global handler for kick out (forced evict) of items in cache
      * @param {Array} [options.stores] - optional array of stores by priority
      * @param {Function} [options.oncomplete] - optional callback for loading completion
@@ -64,7 +64,7 @@
          * @param {Number} [options.maxStrategy] - optional strategy for max items (new items will not be added or closest ttl item should be removed)
          * @param {Number} [options.ttl] - optional TTL for each cache item
          * @param {Number} [options.interval] - optional interval for eviction loop
-         * @param {Function} [options.ontimeout] - optional global handler for timeout of items in cache - return false if you want the item to not be deleted after ttl
+         * @param {Function} [options.ontimeout] - optional global handler for timeout of items in cache - return false if you want the items to not be deleted after ttl, or object { ttl: number, callback: function } to update the TTL or callback
          * @param {Function} [options.onkickout] - optional global handler for kick out (forced evict) of items in cache
          * @param {Array} [options.stores] - optional array of stores by priority
          * @param {Function} [options.oncomplete] - optional callback for loading completion
@@ -283,6 +283,8 @@
                             // Now remove it
                             if (typeof cbRes === 'object') {
                                 touch.call(this, key, cbRes.ttl || this.cache[key].ttl, cbRes.callback || callback);
+                            } else if (typeof timeoutRes === 'object') {
+                                touch.call(this, key, timeoutRes.ttl || this.cache[key].ttl, timeoutRes.callback || callback);
                             } else if (cbRes !== false && timeoutRes !== false) {
                                 remove.call(this, key);
                                 removed++;

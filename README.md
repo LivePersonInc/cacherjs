@@ -52,7 +52,7 @@ optional interval for eviction loop in milliseconds
 Type: `Function`
 Default value: `Empty function`
 
-optional global handler for timeout of items in cache
+optional global handler for timeout of items in cache - return false if you want the items to not be deleted after ttl, or object { ttl: number, callback: function } to update the TTL or callback
 
 #### options.onkickout
 Type: `Function`
