@@ -72,7 +72,7 @@ Will set `value` and associate it with the given `key`.
 `callback` will be called on item timeout - return false if you want the item to not be deleted after ttl, or object { ttl: number, callback: function } to update the TTL or callback
 
 ### touch (key, [optional]ttl, [optional]callback)
-Will reset `ttl` and update ontimeout callback for the given `key`.
+Will reset or update the `ttl` and/or update ontimeout callback for the given `key`.
 `ttl` will override the time to live for the item inside the cache.
 `callback` will override the initial handler to be called on item timeout - return false if you want the item to not be deleted after ttl, or object { ttl: number, callback: function } to update the TTL or callback
 
